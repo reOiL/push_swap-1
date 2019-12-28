@@ -54,6 +54,8 @@ t_form		*init_stacks(int ac, char **av)
 	return (form);
 }
 
+
+/*
 void		print_stacks(int n, t_form *stacks)
 {
 	int 	i;
@@ -83,3 +85,4 @@ void		print_stacks(int n, t_form *stacks)
 	}
 	ft_putstr("\n----------------------\n");
 }
+ */

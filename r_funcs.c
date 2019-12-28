@@ -6,8 +6,10 @@ t_int	*rotate(int n, t_int* stack)
 	int 	tmp;
 
 	i = 0;
-	tmp = stack[0].value;
-	while (i < n - 1 && stack[i + 1].in_use)
+	while (stack[i].in_use == 0)
+		i++;
+	tmp = stack[i].value;
+	while (i < n - 1)
 	{
 		stack[i].value = stack[i + 1].value;
 		i++;

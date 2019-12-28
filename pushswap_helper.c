@@ -28,7 +28,7 @@ int 	check_duplicates(int ac, char **av, int i)
 	n = i + 1;
 	while (n <= ac)
 	{
-		if (av[i] == av[n])
+		if (ft_strequ(av[i], av[n]))
 			return (0);
 		n++;
 	}

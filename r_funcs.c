@@ -18,20 +18,18 @@ t_int	*rotate(int n, t_int* stack)
 	return (stack);
 }
 
-t_form	*make_r(int n, char *inst, t_form *stacks)
+t_form	*make_r(int n, char *inst, t_form *stacks, t_list **instr)
 {
 	if (inst[1] == 'a')
+		stacks->stack_a = rotate(n, stacks->stack_a);
+	else if (inst[1] == 'b')
+		stacks->stack_b = rotate(n, stacks->stack_b);
+	else
 	{
 		stacks->stack_a = rotate(n, stacks->stack_a);
-		return (stacks);
-	}
-	if (inst[1] == 'b')
-	{
 		stacks->stack_b = rotate(n, stacks->stack_b);
-		return (stacks);
 	}
-	stacks->stack_a = rotate(n, stacks->stack_a);
-	stacks->stack_b = rotate(n, stacks->stack_b);
+	ft_lstadd_front(instr, ft_lstnew(inst, 4));
 	return (stacks);
 }
 

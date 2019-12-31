@@ -1,6 +1,6 @@
 #include "push_swap.h"
 
-t_form	*make_p(int n, char *inst, t_form *stacks)
+t_form	*make_p(int n, char *inst, t_form *stacks, t_list **instr)
 {
 	int i;
 	int j;
@@ -9,16 +9,8 @@ t_form	*make_p(int n, char *inst, t_form *stacks)
 
 	j = 0;
 	i = n - 1;
-	if (inst[1] == 'a')
-	{
-		st_from = stacks->stack_b;
-		st_where = stacks->stack_a;
-	}
-	else
-	{
-		st_from = stacks->stack_a;
-		st_where = stacks->stack_b;
-	}
+	st_from = inst[1] == 'a' ? stacks->stack_b : stacks->stack_a;
+	st_where = inst[1] == 'a' ? stacks->stack_a : stacks->stack_b;
 	while (st_where[i].in_use == 1)
 	{
 		i--;
@@ -30,6 +22,7 @@ t_form	*make_p(int n, char *inst, t_form *stacks)
 		st_where[i].in_use = 1;
 		st_from[j].in_use = 0;
 	}
+	ft_lstadd_front(instr, ft_lstnew(inst, 3));
 	return (stacks);
 }
 

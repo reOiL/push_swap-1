@@ -51,3 +51,12 @@ int		check_args(int ac, char **av)
 	return (1);
 }
 
+int		get_first_used(int n, t_int *stack)
+{
+	int		i;
+
+	i = 0;
+	while (!stack[i].in_use)
+		i++;
+	return (i);
+}

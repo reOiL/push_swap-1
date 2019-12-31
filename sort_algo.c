@@ -18,9 +18,7 @@ int 		is_sorted(int n, t_int *stack)
 {
 	int 	i;
 
-	i = 0;
-	while (!stack[i].in_use)
-		i++;
+	i = get_first_used(n, stack);
 	while (i < n - 1)
 	{
 		if (stack[i].value > stack[i + 1].value)
@@ -30,41 +28,55 @@ int 		is_sorted(int n, t_int *stack)
 	return (1);
 }
 
-t_list		*push_back(int n, t_form *stacks, t_list **instr)
+t_form		*quick_sort_a(int n, t_form *stacks, t_list **instr)
 {
+	int 	i;
+	int 	flag;
+	int 	mid_elem;
+
+	i = get_first_used(n, stacks->stack_a);
+	if (n - i < 3 || is_sorted(n, stacks->stack_a))
+		return (is_sorted(n, stacks->stack_a) ? stacks : make_s(n, "sa", stacks, instr));
+	mid_elem = get_mid_elem(n, stacks->stack_a);
+	flag = rra_or_ra(n, i, mid_elem, stacks->stack_a);
+	while (any_more_than_mid(n, mid_elem, stacks->stack_a))
+	{
+		if (is_sorted(n, stacks->stack_a))
+			return (stacks);
+		i = get_first_used(n, stacks->stack_a);
+		if (stacks->stack_a[i].value < mid_elem)
+			stacks = make_p(n, "pb", stacks, instr);
+		else
+			stacks = flag ? make_r(n, "ra", stacks, instr) : make_rr(n, "rra", stacks, instr);
+	}
+	//print_stacks(n, stacks);
+	return (quick_sort_a(n, stacks, instr));
+}
+
+t_list		*insertion_from_b(int n, t_form *stacks, t_list **instr)
+{
+	int		max;
+	int		flag;
+
 	while (!is_empty(n, stacks->stack_b))
 	{
-		stacks = make_p(n, "pa", stacks);
-		ft_lstadd_front(instr, ft_lstnew("pa", 3));
+		flag = 0;
+		max = get_max(n, &flag, stacks->stack_b);
+		while (get_peek(n, stacks->stack_b) != max)
+		{
+			stacks = flag ? make_rr(n, "rrb", stacks, instr) : make_r(n ,"rb", stacks, instr);
+			//print_stacks(n, stacks);
+		}
+		stacks = make_p(n, "pa", stacks, instr);
 	}
 	return (*instr);
 }
 
 t_list		*get_algo(int n, t_form *stacks)
 {
-	int 	min;
-	int 	flag;
 	t_list	*instr;
 
 	instr = NULL;
-	while (!is_sorted(n, stacks->stack_a))
-	{
-		flag = 0;
-		min = get_min(n, &flag, stacks->stack_a);
-		while (get_peek(n, stacks->stack_a) != min)
-		{
-			stacks = flag ? make_rr(n, "rra", stacks) : make_r(n ,"ra", stacks);
-			if (flag)
-				ft_lstadd_front(&instr, ft_lstnew("rra", 4));
-			else
-				ft_lstadd_front(&instr, ft_lstnew("ra", 3));
-			//print_stacks(n, stacks);
-		}
-		if (is_sorted(n, stacks->stack_a))
-			return (push_back(n, stacks, &instr));
-		stacks = make_p(n, "pb", stacks);
-		ft_lstadd_front(&instr, ft_lstnew("pb", 3));
-		//print_stacks(n, stacks);
-	}
-	return (push_back(n, stacks, &instr));
+	stacks = quick_sort_a(n, stacks, &instr);
+	return (insertion_from_b(n, stacks, &instr));
 }

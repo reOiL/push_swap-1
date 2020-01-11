@@ -74,14 +74,21 @@ t_list		*insertion_from_b(int n, t_form *stacks, t_list **instr)
 
 t_list		*get_algo(int n, t_form *stacks)
 {
+	int 	elem;
 	t_list	*instr;
 
 	instr = NULL;
+	print_stacks(n, stacks);
 	stacks = quick_sort_a(n, stacks, &instr);
+	print_stacks(n, stacks);
 	while (!is_empty(n, stacks->stack_b))
 	{
-		get_min_instr(n, &stacks);
-		stacks = push_min_elem(n, stacks, &instr);
+		if (get_first_used(n, stacks->stack_b) == n - 2)
+			stacks = is_sorted(n, stacks->stack_b) ? make_s(n, "sb", stacks, &instr) : stacks;
+		elem = get_min_instr(n, &stacks);
+		int a = stacks->stack_b[elem].min_instr;
+		push_min_elem(elem, n, &stacks, &instr);
+		print_stacks(n, stacks);
 	}
 	//return (insertion_from_b(n, stacks, &instr));
 	return (instr);

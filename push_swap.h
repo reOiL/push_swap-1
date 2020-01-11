@@ -47,14 +47,20 @@ int					any_more_than_mid(int n, int mid_elem, t_int *stack_a);
 //free_all.c
 void				free_all(t_form *stacks, t_list *instructs);
 
-//sort_algo
+//sort_algo.c
 int 				is_empty(int n, t_int *stack);
 int 				is_sorted(int n, t_int *stack);
 t_list				*push_back(int n, t_form *stacks, t_list **instr);
 t_list				*get_algo(int n, t_form *stacks);
 
-//get_min_instructions
+//get_min_instructions.c
+int					get_needed_astack(int elem, int n, t_form **stacks, t_flag *flag_rr);
+int					get_needed_bstack(int elem, int n, t_form **stacks, t_flag *flag_rr);
+int					get_instructions(int elem, int n, t_form **stacks);
 int					get_min_instr(int n, t_form **stacks);
+
+//push_min_elem.c
+void				push_min_elem(int elem, int n, t_form **stacks, t_list **instr);
 
 //s_funcs.c
 t_int				*swap(int n, t_int* stack);

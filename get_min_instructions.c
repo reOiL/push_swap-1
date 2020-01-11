@@ -15,19 +15,16 @@ int		get_needed_astack(int elem, int n, t_form **stacks, t_flag *flag_rr)
 {
 	int 	top_a;
 	int 	rot_a;
+	int		val;
 	int 	oper;
 
 	top_a = get_first_used(n, (*stacks)->stack_a);
 	rot_a = top_a;
-	while (((*stacks)->stack_a[rot_a].value < (*stacks)->stack_b[elem].value && (*stacks)->stack_a[n - 1].value < (*stacks)->stack_b[elem].value) \
-		|| ((*stacks)->stack_a[rot_a].value > (*stacks)->stack_b[elem].value && (*stacks)->stack_a[n - 1].value > (*stacks)->stack_b[elem].value))
+	val = (*stacks)->stack_b[elem].value;
+	while ((*stacks)->stack_a[rot_a].value < val)
 		rot_a++;
-	/*
-	if (rot_a - top_a < elem - top_b || rot_a - top_a < n - elem || n - rot_a < elem - top_b || n - rot_a < n - elem)
-		(*flag_rr).flag_rra = rot_a < (n + top_a) / 2 ? 0 : 1;
-	else
-		(*flag_rr).flag_rra = elem < (n + top_b) / 2 ? 0 : 1;
-	 */
+
+	//TODO находить максимальный элемент и оттуда уже отталкиваться
 	(*flag_rr).flag_rra = rot_a < (n + top_a) / 2 ? 0 : 1;
 	oper = (*flag_rr).flag_rra ? n - rot_a : rot_a - top_a;
 	return (oper);

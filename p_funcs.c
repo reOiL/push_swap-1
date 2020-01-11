@@ -22,7 +22,7 @@ t_form	*make_p(int n, char *inst, t_form *stacks, t_list **instr)
 		st_where[i].in_use = 1;
 		st_from[j].in_use = 0;
 	}
-	ft_lstadd_front(instr, ft_lstnew(inst, 3));
+	ft_lstadd_back(instr, ft_lstnew(inst, 3));
 	return (stacks);
 }
 

@@ -29,7 +29,7 @@ t_form	*make_r(int n, char *inst, t_form *stacks, t_list **instr)
 		stacks->stack_a = rotate(n, stacks->stack_a);
 		stacks->stack_b = rotate(n, stacks->stack_b);
 	}
-	ft_lstadd_front(instr, ft_lstnew(inst, 4));
+	ft_lstadd_back(instr, ft_lstnew(inst, 4));
 	return (stacks);
 }
 

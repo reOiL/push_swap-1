@@ -38,12 +38,12 @@ t_form		*quick_sort_a(int n, t_form *stacks, t_list **instr)
 	if (n - i < 3 || is_sorted(n, stacks->stack_a))
 		return (is_sorted(n, stacks->stack_a) ? stacks : make_s(n, "sa", stacks, instr));
 	mid_elem = get_mid_elem(n, stacks->stack_a);
-	flag = rra_or_ra(n, i, mid_elem, stacks->stack_a);
 	while (any_more_than_mid(n, mid_elem, stacks->stack_a))
 	{
 		if (is_sorted(n, stacks->stack_a))
 			return (stacks);
 		i = get_first_used(n, stacks->stack_a);
+		flag = rra_or_ra(n, i, mid_elem, stacks->stack_a);
 		if (stacks->stack_a[i].value < mid_elem)
 			stacks = make_p(n, "pb", stacks, instr);
 		else

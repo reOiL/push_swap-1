@@ -4,6 +4,7 @@ void		go_rr(int elem, int n, t_form **stacks, t_list **instr)
 {
 	int		top_a;
 	int 	val;
+	int 	flag;
 
 	val = (*stacks)->stack_b[elem].value;
 	top_a = get_first_used(n, (*stacks)->stack_a);
@@ -14,21 +15,26 @@ void		go_rr(int elem, int n, t_form **stacks, t_list **instr)
 	}
 	if (elem == get_first_used(n, (*stacks)->stack_b))
 	{
-		while ((*stacks)->stack_a[top_a].value < val)
-			*stacks = make_r(n, "ra", *stacks, instr);
+		if (val < get_min(n, &flag, (*stacks)->stack_a))
+			while (get_min_elem(n, (*stacks)->stack_a) != get_first_used(n, (*stacks)->stack_a))
+				*stacks = make_r(n, "ra", *stacks, instr);
+		else
+			while ((*stacks)->stack_a[top_a].value < val)
+				*stacks = make_r(n, "ra", *stacks, instr);
 	}
 	else
 	{
 		while (elem-- != get_first_used(n, (*stacks)->stack_b))
 			*stacks = make_r(n, "rb", *stacks, instr);
 	}
-	make_p(n, "pa", *stacks, instr); // Где то проблема здесь
+	make_p(n, "pa", *stacks, instr);
 }
 
 void		go_rrr(int elem, int n, t_form **stacks, t_list **instr)
 {
 	int		top_a;
 	int 	val;
+	int 	flag;
 
 	val = (*stacks)->stack_b[elem].value;
 	top_a = get_first_used(n, (*stacks)->stack_a);
@@ -39,8 +45,18 @@ void		go_rrr(int elem, int n, t_form **stacks, t_list **instr)
 	}
 	if (elem == n)
 	{
-		while ((*stacks)->stack_a[n - 1].value > val || get_min_elem(n, (*stacks)->stack_a) == 0)
-			*stacks = make_rr(n, "rra", *stacks, instr);
+		if (val < get_min(n, &flag, (*stacks)->stack_a))
+		{
+			//int a = get_min_elem(n, (*stacks)->stack_a);
+			while (get_min_elem(n, (*stacks)->stack_a) != get_first_used(n, (*stacks)->stack_a))
+				*stacks = make_rr(n, "rra", *stacks, instr);
+		}
+		else
+		{
+			while ((*stacks)->stack_a[top_a].value < val || // Где то проблема здесь
+				   get_min_elem(n, (*stacks)->stack_a) == get_first_used(n, (*stacks)->stack_a))
+				*stacks = make_rr(n, "rra", *stacks, instr);
+		}
 	}
 	else
 	{
@@ -67,8 +83,8 @@ void		go_rrarb(int elem, int n, t_form **stacks, t_list **instr)
 	}
 	else
 	{
-		while ((*stacks)->stack_a[n - 1].value < val &&
-			   (*stacks)->stack_a[n - 1].value < (*stacks)->stack_a[top_a].value)
+		while (!((*stacks)->stack_a[n - 1].value < val && (*stacks)->stack_a[top_a].value > val)
+			|| get_min_elem(n, (*stacks)->stack_a) == get_first_used(n, (*stacks)->stack_a))
 			*stacks = make_rr(n, "rra", *stacks, instr);
 	}
 	make_p(n, "pa", *stacks, instr);
@@ -79,6 +95,7 @@ void		go_rarrb(int elem, int n, t_form **stacks, t_list **instr)
 	int		top_a;
 	int 	val;
 	int		flag;
+	int a;
 
 	val = (*stacks)->stack_b[elem].value;
 	top_a = get_first_used(n, (*stacks)->stack_a);
@@ -91,7 +108,7 @@ void		go_rarrb(int elem, int n, t_form **stacks, t_list **instr)
 	}
 	else
 	{
-		while ((*stacks)->stack_a[n - 1].value > val && (*stacks)->stack_a[n - 1].value < (*stacks)->stack_a[top_a].value)
+		while ((*stacks)->stack_a[top_a].value < val)
 			*stacks = make_r(n, "ra", *stacks, instr);
 	}
 	make_p(n, "pa", *stacks, instr);
@@ -103,6 +120,7 @@ void		push_min_elem(int elem, int n, t_form **stacks, t_list **instr)
 
 	get_needed_astack(elem, n, stacks, &flag_rr);
 	get_needed_bstack(elem, n, stacks, &flag_rr);
+	print_stacks(n, *stacks);
 	if (flag_rr.flag_rra == flag_rr.flag_rrb)
 	{
 		if (flag_rr.flag_rra)

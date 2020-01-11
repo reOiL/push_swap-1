@@ -32,7 +32,7 @@ int		main(int ac, char **av)
 		instructs = get_algo(ac - 1, stacks);
 	//print_stacks(ac - 1, stacks);
 	print_instructs(instructs);
-	print_stacks(ac - 1, stacks);
+	//print_stacks(ac - 1, stacks);
 	free_all(stacks, instructs);
 	return (0);
 }

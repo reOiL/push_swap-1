@@ -35,13 +35,13 @@ t_form		*quick_sort_a(int n, t_form *stacks, t_list **instr)
 	int 	mid_elem;
 
 	i = get_first_used(n, stacks->stack_a);
-	if (n - i < 3 || is_sorted(n, stacks->stack_a))
+	if (n - i < 3)
 		return (is_sorted(n, stacks->stack_a) ? stacks : make_s(n, "sa", stacks, instr));
 	mid_elem = get_mid_elem(n, stacks->stack_a);
 	while (any_more_than_mid(n, mid_elem, stacks->stack_a))
 	{
-		if (is_sorted(n, stacks->stack_a))
-			return (stacks);
+		//if (is_sorted(n, stacks->stack_a))
+		//	return (stacks);
 		i = get_first_used(n, stacks->stack_a);
 		flag = rra_or_ra(n, i, mid_elem, stacks->stack_a);
 		if (stacks->stack_a[i].value < mid_elem)
@@ -78,19 +78,16 @@ t_list		*get_algo(int n, t_form *stacks)
 	t_list	*instr;
 
 	instr = NULL;
-	//print_stacks(n, stacks);
 	stacks = quick_sort_a(n, stacks, &instr);
-	//print_stacks(n, stacks);
 	while (!is_empty(n, stacks->stack_b))
 	{
-		if (get_first_used(n, stacks->stack_b) == n - 2)
-			stacks = is_sorted(n, stacks->stack_b) ? make_s(n, "sb", stacks, &instr) : stacks;
+		//if (get_first_used(n, stacks->stack_b) == n - 2)
+			//stacks = is_sorted(n, stacks->stack_b) ? make_s(n, "sb", stacks, &instr) : stacks;
 		elem = get_min_instr(n, &stacks);
-		int a = stacks->stack_b[elem].min_instr;
+		//int a = stacks->stack_b[elem].min_instr;
 		push_min_elem(elem, n, &stacks, &instr);
-		//print_stacks(n, stacks);
 	}
 	while (get_min_elem(n, stacks->stack_a) != 0)
-		stacks = make_rr(n, "rra", stacks, &instr);
+		stacks = get_min_elem(n, stacks->stack_a) < n / 2 ? make_r(n, "ra", stacks, &instr) : make_rr(n, "rra", stacks, &instr);
 	return (instr);
 }

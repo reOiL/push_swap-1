@@ -14,19 +14,24 @@ int 	get_needed_bstack(int elem, int n, t_form **stacks, t_flag *flag_rr)
 int		get_needed_astack(int elem, int n, t_form **stacks, t_flag *flag_rr)
 {
 	int 	top_a;
-	int 	rot_a;
+	int		min;
 	int		val;
 	int 	oper;
 
 	top_a = get_first_used(n, (*stacks)->stack_a);
-	rot_a = top_a;
 	val = (*stacks)->stack_b[elem].value;
-	while ((*stacks)->stack_a[rot_a].value < val)
-		rot_a++;
+	min = get_min_elem(n, (*stacks)->stack_a);
+	while ((*stacks)->stack_a[min].value < val)
+	{
+		if (min == n - 1)
+			min = top_a;
+		else
+			min++;
+	}
 
-	//TODO находить максимальный элемент и оттуда уже отталкиваться
-	(*flag_rr).flag_rra = rot_a < (n + top_a) / 2 ? 0 : 1;
-	oper = (*flag_rr).flag_rra ? n - rot_a : rot_a - top_a;
+	//TODO
+	(*flag_rr).flag_rra = min < (n + top_a) / 2 ? 0 : 1;
+	oper = (*flag_rr).flag_rra ? n - min : min - top_a;
 	return (oper);
 }
 

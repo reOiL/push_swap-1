@@ -78,9 +78,9 @@ t_list		*get_algo(int n, t_form *stacks)
 	t_list	*instr;
 
 	instr = NULL;
-	print_stacks(n, stacks);
+	//print_stacks(n, stacks);
 	stacks = quick_sort_a(n, stacks, &instr);
-	print_stacks(n, stacks);
+	//print_stacks(n, stacks);
 	while (!is_empty(n, stacks->stack_b))
 	{
 		if (get_first_used(n, stacks->stack_b) == n - 2)
@@ -88,8 +88,9 @@ t_list		*get_algo(int n, t_form *stacks)
 		elem = get_min_instr(n, &stacks);
 		int a = stacks->stack_b[elem].min_instr;
 		push_min_elem(elem, n, &stacks, &instr);
-		print_stacks(n, stacks);
+		//print_stacks(n, stacks);
 	}
-	//return (insertion_from_b(n, stacks, &instr));
+	while (get_min_elem(n, stacks->stack_a) != 0)
+		stacks = make_rr(n, "rra", stacks, &instr);
 	return (instr);
 }

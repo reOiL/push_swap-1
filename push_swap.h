@@ -59,6 +59,9 @@ int					get_needed_bstack(int elem, int n, t_form **stacks, t_flag *flag_rr);
 int					get_instructions(int elem, int n, t_form **stacks);
 int					get_min_instr(int n, t_form **stacks);
 
+//instructions_helper.c
+int					get_min_elem(int n, t_int *stack);
+
 //push_min_elem.c
 void				push_min_elem(int elem, int n, t_form **stacks, t_list **instr);
 

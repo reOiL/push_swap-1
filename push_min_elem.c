@@ -8,7 +8,7 @@ void		go_rr(int elem, int n, t_form **stacks, t_list **instr)
 
 	val = (*stacks)->stack_b[elem].value;
 	top_a = get_first_used(n, (*stacks)->stack_a);
-	while (elem != get_first_used(n, (*stacks)->stack_b) && (*stacks)->stack_a[top_a].value < val)
+	while (elem != get_first_used(n, (*stacks)->stack_b) && !((*stacks)->stack_a[top_a].value > val && (*stacks)->stack_a[n - 1].value < val))
 	{
 		*stacks = make_r(n, "rr", *stacks, instr);
 		elem--;
@@ -52,7 +52,7 @@ void		go_rrr(int elem, int n, t_form **stacks, t_list **instr)
 		{
 			int a = get_min_elem(n, (*stacks)->stack_a);
 			while (get_min_elem(n, (*stacks)->stack_a) != get_first_used(n, (*stacks)->stack_a))
-				*stacks = make_rr(n, "rra", *stacks, instr);
+				*stacks = get_min_elem(n, (*stacks)->stack_a) < (n + top_a) / 2 ? make_r(n, "ra", *stacks, instr) : make_rr(n, "rra", *stacks, instr);
 		}
 		else
 		{

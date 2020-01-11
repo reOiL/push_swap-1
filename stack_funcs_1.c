@@ -12,6 +12,7 @@ t_int		*init_stack_a(int ac, char **av)
 	{
 		stack_a[i - 1].value = ft_atoi(av[i]);
 		stack_a[i - 1].in_use = 1;
+		stack_a[i - 1].min_instr = 0;
 		i++;
 	}
 	return (stack_a);
@@ -29,6 +30,7 @@ t_int		*init_stack_b(int ac)
 	{
 		stack_b[i - 1].value = 0;
 		stack_b[i - 1].in_use = 0;
+		stack_b[i - 1].min_instr = 0;
 		i++;
 	}
 	return (stack_b);

@@ -4,10 +4,17 @@
 # include "libft/libft.h"
 # include <stdio.h>
 
+typedef struct		s_flag
+{
+	int				flag_rra;
+	int				flag_rrb;
+}					t_flag;
+
 typedef struct		s_int
 {
 	int 			value;
 	int 			in_use;
+	int 			min_instr;
 }					t_int;
 
 typedef struct		s_form
@@ -45,6 +52,9 @@ int 				is_empty(int n, t_int *stack);
 int 				is_sorted(int n, t_int *stack);
 t_list				*push_back(int n, t_form *stacks, t_list **instr);
 t_list				*get_algo(int n, t_form *stacks);
+
+//get_min_instructions
+int					get_min_instr(int n, t_form **stacks);
 
 //s_funcs.c
 t_int				*swap(int n, t_int* stack);

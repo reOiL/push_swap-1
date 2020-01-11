@@ -78,5 +78,11 @@ t_list		*get_algo(int n, t_form *stacks)
 
 	instr = NULL;
 	stacks = quick_sort_a(n, stacks, &instr);
-	return (insertion_from_b(n, stacks, &instr));
+	while (!is_empty(n, stacks->stack_b))
+	{
+		get_min_instr(n, &stacks);
+		stacks = push_min_elem(n, stacks, &instr);
+	}
+	//return (insertion_from_b(n, stacks, &instr));
+	return (instr);
 }

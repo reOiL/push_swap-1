@@ -66,12 +66,18 @@ int					rra_or_ra(int n, int i, int mid_elem, t_int *stack);
 void				free_all(t_form *stacks, t_list *instructs);
 
 /*
-** aort_algo.c
+** sort_algo.c
 */
 int					is_empty(int n, t_int *stack);
 int					is_sorted(int n, t_int *stack);
 t_form				*quick_sort_a(int n, t_form *stacks, t_list **instr);
 t_list				*get_algo(int n, t_form *stacks);
+
+/*
+** three_elems.c
+*/
+t_form				*second_oper(int n, t_form *stacks, t_list **instr);
+t_form				*three_elems_algo(int n, t_form *stacks, t_list **instr);
 
 /*
 ** get_min_instructions.c

@@ -29,6 +29,7 @@ int		main(int ac, char **av)
 	t_form *stacks;
 	t_list *instructs;
 
+	instructs = NULL;
 	if (ac < 2)
 		return (0);
 	if (!check_args(ac, av))
@@ -38,8 +39,8 @@ int		main(int ac, char **av)
 		free_all(stacks, instructs);
 		return (false_print());
 	}
-	if (ac - 1 < 4)
-		instructs = get_algo(ac - 1, stacks);
+	if (ac == 4)
+		stacks = three_elems_algo(ac - 1, stacks, &instructs);
 	else
 		instructs = get_algo(ac - 1, stacks);
 	print_instructs(instructs);

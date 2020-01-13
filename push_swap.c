@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   push_swap.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: eblackbu <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/13 15:00:34 by eblackbu          #+#    #+#             */
+/*   Updated: 2020/01/13 15:00:52 by eblackbu         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 void	print_instructs(t_list *instructs)
@@ -27,7 +39,7 @@ int		main(int ac, char **av)
 		return (false_print());
 	}
 	if (ac - 1 < 4)
-		instructs = get_algo(ac - 1, stacks); //TODO - сортировка для 3 элементов
+		instructs = get_algo(ac - 1, stacks);
 	else
 		instructs = get_algo(ac - 1, stacks);
 	print_instructs(instructs);

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   pushswap_helper.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: eblackbu <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/13 15:04:50 by eblackbu          #+#    #+#             */
+/*   Updated: 2020/01/13 15:05:09 by eblackbu         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 int		false_print(void)
@@ -6,7 +18,7 @@ int		false_print(void)
 	return (0);
 }
 
-int 	check_ints(char *val)
+int		check_ints(char *val)
 {
 	char	*check;
 
@@ -21,9 +33,9 @@ int 	check_ints(char *val)
 	return (0);
 }
 
-int 	check_duplicates(int ac, char **av, int i)
+int		check_duplicates(int ac, char **av, int i)
 {
-	int 	n;
+	int		n;
 
 	n = i + 1;
 	while (n <= ac)

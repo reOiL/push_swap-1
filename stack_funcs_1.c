@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   stack_funcs_1.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: eblackbu <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/13 15:09:23 by eblackbu          #+#    #+#             */
+/*   Updated: 2020/01/13 15:10:11 by eblackbu         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 t_int		*init_stack_a(int ac, char **av)
 {
-	int 	i;
+	int		i;
 	t_int	*stack_a;
 
 	i = 1;
@@ -20,7 +32,7 @@ t_int		*init_stack_a(int ac, char **av)
 
 t_int		*init_stack_b(int ac)
 {
-	int 	i;
+	int		i;
 	t_int	*stack_b;
 
 	i = 1;
@@ -54,36 +66,4 @@ t_form		*init_stacks(int ac, char **av)
 		return (NULL);
 	}
 	return (form);
-}
-
-
-
-void		print_stacks(int n, t_form *stacks)
-{
-	int 	i;
-
-	i = n - 1;
-	ft_putstr("\n----------------------\nStack A: ");
-	while (i >= 0)
-	{
-		if (stacks->stack_a[i].in_use)
-		{
-			ft_putnbr(stacks->stack_a[i].value);
-			ft_putchar(' ');
-		}
-		i--;
-	}
-	ft_putchar('\n');
-	i = n - 1;
-	ft_putstr("Stack B: ");
-	while (i >= 0)
-	{
-		if (stacks->stack_b[i].in_use)
-		{
-			ft_putnbr(stacks->stack_b[i].value);
-			ft_putchar(' ');
-		}
-		i--;
-	}
-	ft_putstr("\n----------------------\n");
 }

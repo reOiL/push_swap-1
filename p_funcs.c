@@ -1,17 +1,29 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   p_funcs.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: eblackbu <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/13 14:54:45 by eblackbu          #+#    #+#             */
+/*   Updated: 2020/01/13 14:55:31 by eblackbu         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 t_form	*make_p(int n, char *inst, t_form *stacks, t_list **instr)
 {
-	int i;
-	int j;
-	t_int*	st_from;
-	t_int*	st_where;
+	int		i;
+	int		j;
+	t_int	*st_from;
+	t_int	*st_where;
 
 	j = 0;
 	i = n - 1;
 	st_from = inst[1] == 'a' ? stacks->stack_b : stacks->stack_a;
 	st_where = inst[1] == 'a' ? stacks->stack_a : stacks->stack_b;
-	while (st_where[i].in_use == 1)
+	while (i >= 0 && st_where[i].in_use == 1)
 	{
 		i--;
 		j++;
@@ -25,5 +37,3 @@ t_form	*make_p(int n, char *inst, t_form *stacks, t_list **instr)
 	ft_lstadd_back(instr, ft_lstnew(inst, 3));
 	return (stacks);
 }
-
-

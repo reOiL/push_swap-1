@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_min_instructions.c                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: eblackbu <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/13 14:50:34 by eblackbu          #+#    #+#             */
+/*   Updated: 2020/01/13 14:51:55 by eblackbu         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
-int 	get_needed_bstack(int elem, int n, t_form **stacks, t_flag *flag_rr)
+int		get_needed_bstack(int elem, int n, t_form **stacks, t_flag *flag_rr)
 {
-	int 	top_b;
-	int 	oper;
+	int		top_b;
+	int		oper;
 
 	top_b = get_first_used(n, (*stacks)->stack_b);
 	(*flag_rr).flag_rrb = elem < (top_b + n) / 2 ? 0 : 1;
@@ -13,10 +25,10 @@ int 	get_needed_bstack(int elem, int n, t_form **stacks, t_flag *flag_rr)
 
 int		get_needed_astack(int elem, int n, t_form **stacks, t_flag *flag_rr)
 {
-	int 	top_a;
+	int		top_a;
 	int		min;
 	int		val;
-	int 	oper;
+	int		oper;
 
 	top_a = get_first_used(n, (*stacks)->stack_a);
 	val = (*stacks)->stack_b[elem].value;
@@ -28,18 +40,16 @@ int		get_needed_astack(int elem, int n, t_form **stacks, t_flag *flag_rr)
 		else
 			min++;
 	}
-
-	//TODO
 	(*flag_rr).flag_rra = min < (n + top_a) / 2 ? 0 : 1;
 	oper = (*flag_rr).flag_rra ? n - min : min - top_a;
 	return (oper);
 }
 
-int 	get_instructions(int elem, int n, t_form **stacks)
+int		get_instructions(int elem, int n, t_form **stacks)
 {
 	t_flag	flag_rr;
-	int 	in;
-	int 	rot_a;
+	int		in;
+	int		rot_a;
 	int		rot_b;
 
 	in = 1;
@@ -57,8 +67,8 @@ int 	get_instructions(int elem, int n, t_form **stacks)
 int		get_min_instr(int n, t_form **stacks)
 {
 	int		i;
-	int 	elem;
-	int 	min;
+	int		elem;
+	int		min;
 
 	i = get_first_used(n, (*stacks)->stack_b);
 	while (i < n)

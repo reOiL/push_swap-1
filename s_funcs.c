@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   s_funcs.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: eblackbu <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/13 15:06:25 by eblackbu          #+#    #+#             */
+/*   Updated: 2020/01/13 15:06:54 by eblackbu         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
-t_int	*swap(int n, t_int* stack)
+t_int	*swap(int n, t_int *stack)
 {
-	int 	i;
-	int 	tmp;
+	int		i;
+	int		tmp;
 
 	i = 0;
 	while (stack[i].in_use == 0)
@@ -31,4 +43,3 @@ t_form	*make_s(int n, char *inst, t_form *stacks, t_list **instr)
 	ft_lstadd_back(instr, ft_lstnew(inst, 4));
 	return (stacks);
 }
-

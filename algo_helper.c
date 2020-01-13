@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   algo_helper.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: eblackbu <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/13 14:48:33 by eblackbu          #+#    #+#             */
+/*   Updated: 2020/01/13 14:49:58 by eblackbu         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
-int 	get_max(int n, int *flag, t_int *stack)
+int		get_max(int n, int *flag, t_int *stack)
 {
-	int 	i;
-	int 	max;
+	int		i;
+	int		max;
 
 	i = 0;
 	max = -2147483648;
@@ -19,10 +31,10 @@ int 	get_max(int n, int *flag, t_int *stack)
 	return (max);
 }
 
-int 	get_min(int n, int *flag, t_int *stack)
+int		get_min(int n, int *flag, t_int *stack)
 {
-	int 	i;
-	int 	min;
+	int		i;
+	int		min;
 
 	i = 0;
 	min = 2147483647;
@@ -38,31 +50,29 @@ int 	get_min(int n, int *flag, t_int *stack)
 	return (min);
 }
 
-int 	get_peek(int n, t_int *stack)
+int		get_peek(int n, t_int *stack)
 {
-	int 	i;
+	int		i;
 
 	i = 0;
-	while (stack[i].in_use == 0)
+	while (i < n && stack[i].in_use == 0)
 		i++;
 	return (stack[i].value);
 }
 
-int 	get_mid_elem(int n, t_int *stack)
+int		get_mid_elem(int n, t_int *stack)
 {
 	int		i;
-	int 	j;
+	int		j;
 	int		first;
-	int 	count;
-	int 	a;
+	int		count;
 
-	i =  get_first_used(n, stack);
+	i = get_first_used(n, stack);
 	first = get_first_used(n, stack);
 	while (i < n)
 	{
 		j = first;
 		count = 0;
-		a = stack[i].value;
 		while (j < n)
 		{
 			if (stack[j].value < stack[i].value)
@@ -73,11 +83,12 @@ int 	get_mid_elem(int n, t_int *stack)
 			return (stack[i].value);
 		i++;
 	}
+	return (0);
 }
 
 int		rra_or_ra(int n, int i, int mid_elem, t_int *stack)
 {
-	int 	j;
+	int		j;
 
 	i += 1;
 	j = n - 1;
@@ -92,21 +103,6 @@ int		rra_or_ra(int n, int i, int mid_elem, t_int *stack)
 			i++;
 			j--;
 		}
-	}
-}
-
-int 	any_more_than_mid(int n, int mid_elem, t_int *stack_a)
-{
-	int 	i;
-
-	i = 0;
-	while (!stack_a[i].in_use)
-		i++;
-	while (i < n)
-	{
-		if (stack_a[i].value < mid_elem)
-			return (1);
-		i++;
 	}
 	return (0);
 }

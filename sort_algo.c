@@ -6,7 +6,7 @@
 /*   By: eblackbu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 15:07:07 by eblackbu          #+#    #+#             */
-/*   Updated: 2020/01/13 15:09:03 by eblackbu         ###   ########.fr       */
+/*   Updated: 2020/01/13 16:53:31 by eblackbu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,14 @@ int			is_sorted(int n, t_int *stack)
 	return (1);
 }
 
+t_form		*swap_two(int n, t_form *stacks, t_list **instr)
+{
+	if (is_sorted(n, stacks->stack_a))
+		return (stacks);
+	else
+		return (make_s(n, "sa", stacks, instr));
+}
+
 t_form		*quick_sort_a(int n, t_form *stacks, t_list **instr)
 {
 	int		i;
@@ -48,8 +56,7 @@ t_form		*quick_sort_a(int n, t_form *stacks, t_list **instr)
 
 	i = get_first_used(n, stacks->stack_a);
 	if (n - i < 3)
-		return (is_sorted(n, stacks->stack_a) \
-				? stacks : make_s(n, "sa", stacks, instr));
+		return (swap_two(n, stacks, instr));
 	if (n - i == 3)
 		return (three_elems_algo(n, stacks, instr));
 	mid_elem = get_mid_elem(n, stacks->stack_a);

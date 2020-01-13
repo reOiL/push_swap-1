@@ -6,7 +6,7 @@
 /*   By: eblackbu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 14:55:55 by eblackbu          #+#    #+#             */
-/*   Updated: 2020/01/13 14:59:39 by eblackbu         ###   ########.fr       */
+/*   Updated: 2020/01/13 16:46:32 by eblackbu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,20 +20,15 @@ void		go_rr(int elem, int n, t_form **stacks, t_list **instr)
 
 	val = (*stacks)->stack_b[elem].value;
 	top_a = get_first_used(n, (*stacks)->stack_a);
-	while (elem != get_first_used(n, (*stacks)->stack_b) && !((*stacks)->stack_a[top_a].value > val && (*stacks)->stack_a[n - 1].value < val))
+	while (elem != get_first_used(n, (*stacks)->stack_b) \
+	&& !((*stacks)->stack_a[top_a].value > val \
+	&& (*stacks)->stack_a[n - 1].value < val))
 	{
 		*stacks = make_r(n, "rr", *stacks, instr);
 		elem--;
 	}
 	if (elem == get_first_used(n, (*stacks)->stack_b))
-	{
-		if (val < get_min(n, &flag, (*stacks)->stack_a))
-			while (get_min_elem(n, (*stacks)->stack_a) != get_first_used(n, (*stacks)->stack_a))
-				*stacks = make_r(n, "ra", *stacks, instr);
-		else
-			while (!((*stacks)->stack_a[top_a].value > val && (*stacks)->stack_a[n - 1].value < val))
-				*stacks = make_r(n, "ra", *stacks, instr);
-	}
+		go_rr_helper(n, val, stacks, instr);
 	else
 	{
 		while (elem-- != get_first_used(n, (*stacks)->stack_b))
@@ -46,29 +41,17 @@ void		go_rrr(int elem, int n, t_form **stacks, t_list **instr)
 {
 	int		top_a;
 	int		val;
-	int		flag;
 
 	val = (*stacks)->stack_b[elem].value;
 	top_a = get_first_used(n, (*stacks)->stack_a);
-	while (elem != n && !((*stacks)->stack_a[n - 1].value < val && (*stacks)->stack_a[top_a].value > val))
+	while (elem != n && !((*stacks)->stack_a[n - 1].value < val \
+			&& (*stacks)->stack_a[top_a].value > val))
 	{
 		*stacks = make_rr(n, "rrr", *stacks, instr);
 		elem++;
 	}
 	if (elem == n)
-	{
-		if (val < get_min(n, &flag, (*stacks)->stack_a))
-		{
-			while (get_min_elem(n, (*stacks)->stack_a) != get_first_used(n, (*stacks)->stack_a))
-				*stacks = get_min_elem(n, (*stacks)->stack_a) < (n + top_a) / 2 ? make_r(n, "ra", *stacks, instr) : make_rr(n, "rra", *stacks, instr);
-		}
-		else
-		{
-			while (!((*stacks)->stack_a[n - 1].value < val && (*stacks)->stack_a[top_a].value > val)
-				   || get_min_elem(n, (*stacks)->stack_a) == get_first_used(n, (*stacks)->stack_a))
-				*stacks = make_rr(n, "rra", *stacks, instr);
-		}
-	}
+		go_rrr_helper(n, val, stacks, instr);
 	else
 	{
 		while (elem++ != n)

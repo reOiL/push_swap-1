@@ -101,6 +101,9 @@ int					any_more_than_mid(int n, int mid_elem, t_int *stack_a);
 void				push_min_elem(int elem, int n, \
 									t_form **stacks, t_list **instr);
 
+void				go_rrr_helper(int n, int val, t_form **stacks, t_list **instr);
+void				go_rr_helper(int n, int val, t_form **stacks, t_list **instr);
+
 /*
 ** s_funcs.c
 */

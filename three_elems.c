@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   three_elems.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: eblackbu <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/13 16:46:42 by eblackbu          #+#    #+#             */
+/*   Updated: 2020/01/13 16:47:07 by eblackbu         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 t_form	*second_oper(int n, t_form *stacks, t_list **instr)
 {
-	int 	fu;
+	int		fu;
 
 	fu = get_first_used(n, stacks->stack_a);
 	if (stacks->stack_a[fu + 2].value < stacks->stack_a[fu + 1].value \
@@ -21,7 +33,7 @@ t_form	*second_oper(int n, t_form *stacks, t_list **instr)
 
 t_form	*three_elems_algo(int n, t_form *stacks, t_list **instr)
 {
-	int 	fu;
+	int		fu;
 
 	fu = get_first_used(n, stacks->stack_a);
 	if (stacks->stack_a[fu].value < stacks->stack_a[fu + 2].value \
